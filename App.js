@@ -1,20 +1,34 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { ImageBackground, StyleSheet, View } from "react-native";
+import RegistrationScreen from "./src/screens/RegistrationScreen.jsx";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Opa opa pa!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const App = () => (
+  <View style={styles.container}>
+    <ImageBackground
+      source={require("./assets/images/BG.png")}
+      resizeMode="cover"
+      style={styles.image}
+    ></ImageBackground>
+    <RegistrationScreen />
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+  },
+  image: {
+    flex: 1,
     justifyContent: "center",
   },
+  text: {
+    color: "white",
+    fontSize: 42,
+    lineHeight: 84,
+    fontWeight: "bold",
+    textAlign: "center",
+    backgroundColor: "#000000c0",
+  },
 });
+
+export default App;
