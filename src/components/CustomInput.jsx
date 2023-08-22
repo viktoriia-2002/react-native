@@ -13,8 +13,6 @@ export default CustomInput;
 
 const styles = StyleSheet.create({
   inputWrapper: {
-    // maxWidth: 343,
-    // width: "100%",
     width: "90%",
     borderWidth: 1,
     borderStyle: "solid",
