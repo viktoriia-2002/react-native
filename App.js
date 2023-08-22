@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    justifyContent: "center",
+    // justifyContent: "center",
   },
   text: {
     color: "white",
