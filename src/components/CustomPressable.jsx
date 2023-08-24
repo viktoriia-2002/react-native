@@ -1,7 +1,7 @@
 import { View, Pressable, StyleSheet, Text, Alert } from "react-native";
 
 const backgroundColor = "#FF6C00";
-const color = (contained) => (contained ? "black" : "white");
+const color = (contained) => (contained ? "white" : "black");
 
 const CustomPressable = ({ title, undrlineTitle, contained }) => {
   console.log(contained);
@@ -9,7 +9,7 @@ const CustomPressable = ({ title, undrlineTitle, contained }) => {
   return (
     <View style={styles.pressableWrapper}>
       <Pressable
-        style={contained ? styles.button : styles.containedButton}
+        style={contained ? styles.containedButton : styles.button}
         onPress={() => Alert.alert("Button with adjusted color pressed")}
       >
         <Text style={[styles.buttonText, { color: color(contained) }]}>
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: 27,
   },
 
   button: {

@@ -1,63 +1,85 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, Text, Image, View } from "react-native";
+import { StyleSheet, Text, Image, View, Platform } from "react-native";
 import CustomInput from "../components/CustomInput";
 import CustomPressable from "../components/CustomPressable";
-import { useFonts } from "expo-font";
 
-const isLogin = true; // temporary flag
-
+const isLogged = true; 
 const RegistrationScreen = () => {
-  const [login, onChangeLogin] = useState("Логін");
-  const [email, onChangeEmail] = useState("Адреса електронної пошти");
-  const [password, onChangePassword] = useState("Пароль");
-  const [fontsLoaded] = useFonts({
-    "Roboto-Bold": require("../../assets/fonts/Roboto-Bold.ttf"),
-  });
+  const [login, onChangeLogin] = useState("");
+  const [email, onChangeEmail] = useState("");
+  const [password, onChangePassword] = useState("");
 
-  if (!fontsLoaded) {
-    return null;
-  }
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.imageWrapper}>
-        {isLogin && (
+    <View style={styles.container}>
+      <View style={styles.registartionWrapper}>
+        <View style={styles.imageWrapper}>
+          {isLogged ? (
+            <Image
+              style={styles.userImg}
+              source={require("../../assets/images/userImg.png")}
+            />
+          ) : (
+            <View style={styles.imageHolder} />
+          )}
+
           <Image
-            style={styles.userImg}
-            source={require("../../assets/images/userImg.png")}
+            style={isLogged ? styles.removeIcon : styles.addIcon}
+            source={require(isLogged
+              ? "../../assets/images/removeIcon.png"
+              : "../../assets/images/add.png")}
           />
-        )}
+        </View>
 
-        <Image
-          style={styles.addIcon}
-          source={require(isLogin
-            ? "../../assets/images/removeIcon.png"
-            : "../../assets/images/add.png")}
+        <Text style={styles.title}>Реєстрація</Text>
+
+        <CustomInput
+          onChange={onChangeLogin}
+          value={login}
+          placeholder="Логін"
+          autoComplete="login"
         />
+
+        <CustomInput
+          onChange={onChangeEmail}
+          value={email}
+          placeholder="Адреса електронної пошти"
+          autoComplete="email"
+        />
+
+        <CustomInput
+          onChange={onChangePassword}
+          value={password}
+          secureTextEntry={true}
+          placeholder="Пароль"
+          autoComplete="password"
+        />
+
+        <CustomPressable title="Зареєстуватися" contained />
+        <CustomPressable title="Вже є акаунт?" undrlineTitle="Увійти" />
       </View>
-
-      <Text style={styles.title}>Реєстрація</Text>
-      <CustomInput onChange={onChangeLogin} value={login} />
-      <CustomInput onChange={onChangeEmail} value={email} />
-      <CustomInput onChange={onChangePassword} value={password} />
-
-      <CustomPressable title="Зареєстуватися" />
-      {/* <CustomPressable title="Зареєстуватися" undrlineTitle="eeee" contained /> */}
-    </SafeAreaView>
+    </View>
   );
 };
-
-export default RegistrationScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-end",
+  },
+
+  registartionWrapper: {
+    flex: 0.6,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    backgroundColor: "white",
     alignItems: "center",
   },
+
   title: {
-    fontSize: 20,
-    fontFamily: "Roboto-Bold",
-    marginBottom: 20,
+    fontSize: 30,
+    fontFamily: "Roboto-Medium",
+    marginBottom: 40,
+    marginTop: 90,
   },
   imageWrapper: {
     position: "relative",
@@ -65,116 +87,26 @@ const styles = StyleSheet.create({
   },
   userImg: {
     position: "absolute",
-    top: -140,
+    top: -60,
+  },
+  imageHolder: {
+    position: "absolute",
+    top: -60,
+    backgroundColor: "#F6F6F6",
+    height: 120,
+    width: 120,
+    borderRadius: 16,
   },
   addIcon: {
     position: "absolute",
-    top: -60,
-    right: -10,
+    top: 15,
+    right: -13,
+  },
+  removeIcon: {
+    position: "absolute",
+    top: 15,
+    right: -20,
   },
 });
-////////////////
 
-// import React, { useState } from "react";
-// import { SafeAreaView, StyleSheet, Text, Button } from "react-native";
-// import CustomInput from "../components/CustomInput";
-// import CustomPressable from "../components/CustomPressable";
-// import { useFonts } from "expo-font";
-
-// const RegistrationScreen = () => {
-//   const [login, onChangeLogin] = useState("Логін");
-//   const [email, onChangeEmail] = useState("Адреса електронної пошти");
-//   const [password, onChangePassword] = useState("Пароль");
-//   const [fontsLoaded] = useFonts({
-//     "Roboto-Bold": require("../../assets/fonts/Roboto-Bold.ttf"),
-//   });
-
-//   if (!fontsLoaded) {
-//     return null;
-//   }
-//   return (
-//     <SafeAreaView style={styles.container}>
-//       <Text style={styles.title}>Реєстрація</Text>
-//       <CustomInput onChange={onChangeLogin} value={login} />
-//       <CustomInput onChange={onChangeEmail} value={email} />
-//       <CustomInput onChange={onChangePassword} value={password} />
-
-//       <CustomPressable title="Зареєстуватися" />
-//       {/* <CustomPressable title="Зареєстуватися" undrlineTitle="eeee" contained /> */}
-//     </SafeAreaView>
-//   );
-// };
-
-// export default RegistrationScreen;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     borderTopLeftRadius: 25,
-//     borderTopRightRadius: 25,
-//     backgroundColor: "red",
-//     overflow: "hidden",
-//   },
-//   title: {
-//     fontSize: 20,
-//     fontFamily: "Roboto-Bold",
-//     marginBottom: 20,
-//   },
-// });
-
-// import React, { useState } from "react";
-// import { SafeAreaView, StyleSheet, Text, Button, Image } from "react-native";
-// import CustomInput from "../components/CustomInput";
-// import CustomPressable from "../components/CustomPressable";
-// import { useFonts } from "expo-font";
-
-// const RegistrationScreen = () => {
-//   const [login, onChangeLogin] = useState("Логін");
-//   const [email, onChangeEmail] = useState("Адреса електронної пошти");
-//   const [password, onChangePassword] = useState("Пароль");
-//   const [fontsLoaded] = useFonts({
-//     "Roboto-Bold": require("../../assets/fonts/Roboto-Bold.ttf"),
-//   });
-
-//   if (!fontsLoaded) {
-//     return null;
-//   }
-//   return (
-//     <SafeAreaView style={styles.container}>
-//       <Image
-//         style={styles.userImg}
-//         source={require("../../assets/images/userImg.png")}
-//       />
-//       <Text style={styles.title}>Реєстрація</Text>
-//       <CustomInput onChange={onChangeLogin} value={login} />
-//       <CustomInput onChange={onChangeEmail} value={email} />
-//       <CustomInput onChange={onChangePassword} value={password} />
-
-//       <CustomPressable title="Зареєстуватися" />
-//       {/* <CustomPressable title="Зареєстуватися" undrlineTitle="eeee" contained /> */}
-//     </SafeAreaView>
-//   );
-// };
-
-// export default RegistrationScreen;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     borderTopLeftRadius: 25,
-//     borderTopRightRadius: 25,
-//     backgroundColor: "red",
-//     overflow: "hidden",
-//   },
-//   title: {
-//     fontSize: 30,
-//     fontFamily: "Roboto-Bold",
-//     marginBottom: 20,
-//   },
-
-//   userImg: {},
-// });
+export default RegistrationScreen;
