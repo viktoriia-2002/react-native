@@ -46,9 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   registrationContainer: {
-    justifyContent: "flex-end", // Push the RegistrationScreen to the bottom
-    flex: 1, // Take up entire available space
-    height: 200,
+    flex: 1,
   },
 });
 
