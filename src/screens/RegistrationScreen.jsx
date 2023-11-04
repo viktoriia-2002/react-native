@@ -109,10 +109,19 @@
 //   },
 // });
 
-// export default RegistrationScreen;
+// // export default RegistrationScreen;
 
 import React, { useState } from "react";
-import { StyleSheet, Text, Image, View, Platform } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+} from "react-native";
 import CustomInput from "../components/CustomInput";
 import CustomPressable from "../components/CustomPressable";
 
@@ -123,54 +132,56 @@ const RegistrationScreen = () => {
   const [password, onChangePassword] = useState("");
 
   return (
-    <View style={styles.container}>
-      <View style={styles.registartionWrapper}>
-        <View style={styles.imageWrapper}>
-          {isLogged ? (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <View style={styles.registartionWrapper}>
+          <View style={styles.imageWrapper}>
+            {isLogged ? (
+              <Image
+                style={styles.userImg}
+                source={require("../../assets/images/userImg.png")}
+              />
+            ) : (
+              <View style={styles.imageHolder} />
+            )}
+
             <Image
-              style={styles.userImg}
-              source={require("../../assets/images/userImg.png")}
+              style={isLogged ? styles.removeIcon : styles.addIcon}
+              source={require(isLogged
+                ? "../../assets/images/removeIcon.png"
+                : "../../assets/images/add.png")}
             />
-          ) : (
-            <View style={styles.imageHolder} />
-          )}
+          </View>
 
-          <Image
-            style={isLogged ? styles.removeIcon : styles.addIcon}
-            source={require(isLogged
-              ? "../../assets/images/removeIcon.png"
-              : "../../assets/images/add.png")}
+          <Text style={styles.title}>Реєстрація</Text>
+
+          <CustomInput
+            onChange={onChangeLogin}
+            value={login}
+            placeholder="Логін"
+            autoComplete="login"
           />
+
+          <CustomInput
+            onChange={onChangeEmail}
+            value={email}
+            placeholder="Адреса електронної пошти"
+            autoComplete="email"
+          />
+
+          <CustomInput
+            onChange={onChangePassword}
+            value={password}
+            secureTextEntry={true}
+            placeholder="Пароль"
+            autoComplete="password"
+          />
+
+          <CustomPressable title="Зареєстуватися" contained />
+          <CustomPressable title="Вже є акаунт? Увійти" />
         </View>
-
-        <Text style={styles.title}>Реєстрація</Text>
-
-        <CustomInput
-          onChange={onChangeLogin}
-          value={login}
-          placeholder="Логін"
-          autoComplete="login"
-        />
-
-        <CustomInput
-          onChange={onChangeEmail}
-          value={email}
-          placeholder="Адреса електронної пошти"
-          autoComplete="email"
-        />
-
-        <CustomInput
-          onChange={onChangePassword}
-          value={password}
-          secureTextEntry={true}
-          placeholder="Пароль"
-          autoComplete="password"
-        />
-
-        <CustomPressable title="Зареєстуватися" contained />
-        <CustomPressable title="Вже є акаунт? Увійти" />
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
