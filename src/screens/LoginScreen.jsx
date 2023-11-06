@@ -42,12 +42,22 @@ import {
 import CustomInput from "../components/CustomInput";
 import CustomPressable from "../components/CustomPressable";
 import image from "../../assets/images/BG.png";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 const isLogged = true;
 
 const LoginScreen = () => {
   const [email, onChangeEmail] = useState("");
   const [password, onChangePassword] = useState("");
+
+  const navigation = useNavigation();
+
+  const { params: { userId } = {} } = useRoute();
+  useRoute();
+
+  const handleLoginPress = () => {
+    navigation.navigate("Registration");
+  };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -74,9 +84,16 @@ const LoginScreen = () => {
               placeholder="Пароль"
               autoComplete="password"
             />
-
             <CustomPressable title="Увійти" contained />
-            <CustomPressable title="Немає акаунту? Зареєструватися" />
+
+            <Text style={styles.loginText}>
+              Немає акаунту?
+              <TouchableWithoutFeedback onPress={handleLoginPress}>
+                <Text style={{ textDecorationLine: "underline" }}>
+                  Зареєструватися
+                </Text>
+              </TouchableWithoutFeedback>
+            </Text>
           </View>
         </View>
       </ImageBackground>
@@ -107,6 +124,10 @@ const styles = StyleSheet.create({
   imageWrapper: {
     position: "relative",
     width: 120,
+  },
+  loginText: {
+    color: "#1B4371",
+    fontSize: 16,
   },
 });
 

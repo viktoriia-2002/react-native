@@ -138,19 +138,22 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <KeyboardAvoidingView
+      {/* <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS == "ios" ? "padding" : "height"}
-      >
-        <MainStack.Navigator initialRouteName="Login">
-          <MainStack.Screen
-            name="Registration"
-            component={RegistrationScreen}
-          />
-          <MainStack.Screen name="Login" component={Login} />
-          <MainStack.Screen name="Home" component={Home} />
-        </MainStack.Navigator>
-      </KeyboardAvoidingView>
+      > */}
+      <MainStack.Navigator initialRouteName="RegistrationScreen">
+        <MainStack.Screen
+          name="Registration"
+          component={RegistrationScreen}
+          options={{
+            headerTitle: "", // Hide the header title
+          }}
+        />
+        <MainStack.Screen name="Login" component={Login} />
+        <MainStack.Screen name="Home" component={Home} />
+      </MainStack.Navigator>
+      {/* </KeyboardAvoidingView> */}
     </NavigationContainer>
   );
 };
