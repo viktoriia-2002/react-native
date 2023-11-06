@@ -52,6 +52,9 @@
 
 // export default App;
 
+//   /* <MainStack.Navigator initialRouteName="Home"> */
+// // }
+
 // import "react-native-gesture-handler";
 // import React from "react";
 // import { NavigationContainer } from "@react-navigation/native";
@@ -61,6 +64,7 @@
 //   StyleSheet,
 //   View,
 //   KeyboardAvoidingView,
+//   Platform,
 // } from "react-native";
 // import { useFonts } from "expo-font";
 // import Login from "./src/screens/LoginScreen.jsx";
@@ -81,30 +85,10 @@
 
 //   return (
 //     <NavigationContainer>
-//       <MainStack.Navigator>
-//         {
-//           <View style={styles.container}>
-//             <ImageBackground
-//               source={require("./assets/images/BG.png")}
-//               resizeMode="cover"
-//               style={styles.image}
-//             >
-//               <KeyboardAvoidingView
-//                 style={{ flex: 1 }}
-//                 behavior={Platform.OS == "ios" ? "padding" : "height"}
-//               >
-//                 <View style={styles.registrationContainer}>
-//                   <MainStack.Screen
-//                     name="Registration"
-//                     component={RegistrationScreen}
-//                   />
-//                   <MainStack.Screen name="Login" initialRouteName={Login} />
-//                   <MainStack.Screen name="Home" component={Home} />
-//                 </View>
-//               </KeyboardAvoidingView>
-//             </ImageBackground>
-//           </View>
-//         }
+//       <MainStack.Navigator initialRouteName="Registration">
+//         <MainStack.Screen name="Registration" component={RegistrationScreen} />
+//         <MainStack.Screen name="Login" component={Login} />
+//         <MainStack.Screen name="Home" component={Home} />
 //       </MainStack.Navigator>
 //     </NavigationContainer>
 //   );
@@ -124,17 +108,6 @@
 
 // export default App;
 
-// // - components
-// //   - CustomInput.jsx
-// //   - CustomPressable.jsx
-// // - screens
-// //   - RegistrationScreen.jsx
-// //   - LoginScreen.jsx
-// // -Home.jsx
-// // - App.js
-// {
-//   /* <MainStack.Navigator initialRouteName="Home"> */
-// }
 import "react-native-gesture-handler";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
@@ -165,11 +138,19 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <MainStack.Navigator initialRouteName="Home">
-        <MainStack.Screen name="Registration" component={RegistrationScreen} />
-        <MainStack.Screen name="Login" component={Login} />
-        <MainStack.Screen name="Home" component={Home} />
-      </MainStack.Navigator>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+      >
+        <MainStack.Navigator initialRouteName="Login">
+          <MainStack.Screen
+            name="Registration"
+            component={RegistrationScreen}
+          />
+          <MainStack.Screen name="Login" component={Login} />
+          <MainStack.Screen name="Home" component={Home} />
+        </MainStack.Navigator>
+      </KeyboardAvoidingView>
     </NavigationContainer>
   );
 };
@@ -180,10 +161,10 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+    resizeMode: "cover",
   },
   registrationContainer: {
     flex: 1,
   },
 });
-
 export default App;
